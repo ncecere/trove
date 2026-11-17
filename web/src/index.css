@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+
+  /* Deep neutral "ink" with a faint blue cast */
+  --color-ink-50: #f4f5f8;
+  --color-ink-100: #e6e8ee;
+  --color-ink-200: #c9cdd8;
+  --color-ink-300: #a1a8b8;
+  --color-ink-400: #7a8296;
+  --color-ink-500: #555d70;
+  --color-ink-600: #3a4152;
+  --color-ink-700: #282e3b;
+  --color-ink-750: #20252f;
+  --color-ink-800: #191d26;
+  --color-ink-850: #14171f;
+  --color-ink-900: #0f1218;
+  --color-ink-950: #0a0c11;
+
+  /* "Ember": Trove's one confident accent (warm gold -> copper) */
+  --color-ember-200: #ffe4b0;
+  --color-ember-300: #ffd27a;
+  --color-ember-400: #fbb94f;
+  --color-ember-500: #f59a36;
+  --color-ember-600: #e9772f;
+  --color-ember-700: #c55a22;
+
+  --breakpoint-3xl: 120rem;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -8px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 18px 40px -12px rgb(0 0 0 / 0.75);
+
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-pop-in: pop-in 0.18s ease-out both;
+  --animate-slide-up: slide-up 0.25s ease-out both;
+  --animate-indeterminate: indeterminate 1.4s ease-in-out infinite;
+
+  @keyframes indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -150% 0;
+    }
+    100% {
+      background-position: 250% 0;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+  }
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-ink-950 text-ink-100 font-sans;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ember-400);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-ember-500) 45%, transparent);
+  }
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  dialog::backdrop {
+    background: rgb(5 6 9 / 0.72);
+    backdrop-filter: blur(4px);
+  }
+  input[type='search']::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-600) transparent;
+}
+
+@utility text-ember-gradient {
+  background: linear-gradient(100deg, var(--color-ember-300), var(--color-ember-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-ember-gradient {
+  background-image: linear-gradient(135deg, var(--color-ember-300) 0%, var(--color-ember-500) 55%, var(--color-ember-600) 100%);
+}
+
+@utility skeleton {
+  background-color: var(--color-ink-800);
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklab, var(--color-ink-600) 45%, transparent) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

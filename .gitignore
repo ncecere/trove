@@ -1,0 +1,14 @@
+/data/
+/demo/
+/bin/
+/trove
+web/node_modules/
+web/dist/*
+!web/dist/.gitkeep
+.DS_Store
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
